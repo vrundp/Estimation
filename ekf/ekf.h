@@ -112,7 +112,7 @@ private:
     Dynamics function that computes the time derivative of state vector, STM, and L
     */
     VectorXd f_full(const double t, const VectorXd& X);
-    
+
     /* 
     Pure virtual function that computes the non-linear dynamics function of the system
     as dx/dt = f(x, u, t) where x is the state, u is control input, t is the time
@@ -141,6 +141,8 @@ private:
     Virtual function that implements an integrator that solves a differential
     equation of the form dX/dt = f(t, X) as X = integral of f(t', X) dt' from t to t + dt
     where X is some vector quantity that needs to be solved for and t is the time
+    note: this class implements the RK4 integration method; the derived class can implement
+          a different integration method, if desired, which outputs X at time t + dt
     */
     virtual std::pair<double, VectorXd> integrator(
         std::function<VectorXd(const double, const VectorXd&)> f, 
